@@ -2,7 +2,7 @@
 //
 // WARNING: Code you write here will be lost the next time you deploy the project.
 
-package mxutils.proxies;
+package mxchartutil.proxies;
 
 public class DataPoint
 {
@@ -13,7 +13,7 @@ public class DataPoint
 	/**
 	 * Internal name of this entity
 	 */
-	public static final java.lang.String entityName = "MxUtils.DataPoint";
+	public static final java.lang.String entityName = "MxChartUtil.DataPoint";
 
 	/**
 	 * Enum describing members of this entity
@@ -40,15 +40,15 @@ public class DataPoint
 
 	public DataPoint(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MxUtils.DataPoint"));
+		this(context, com.mendix.core.Core.instantiate(context, "MxChartUtil.DataPoint"));
 	}
 
 	protected DataPoint(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject dataPointMendixObject)
 	{
 		if (dataPointMendixObject == null)
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MxUtils.DataPoint", dataPointMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MxUtils.DataPoint");
+		if (!com.mendix.core.Core.isSubClassOf("MxChartUtil.DataPoint", dataPointMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a MxChartUtil.DataPoint");
 
 		this.dataPointMendixObject = dataPointMendixObject;
 		this.context = context;
@@ -58,24 +58,24 @@ public class DataPoint
 	 * @deprecated Use 'DataPoint.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@Deprecated
-	public static mxutils.proxies.DataPoint initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
+	public static mxchartutil.proxies.DataPoint initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		return mxutils.proxies.DataPoint.load(context, mendixIdentifier);
+		return mxchartutil.proxies.DataPoint.load(context, mendixIdentifier);
 	}
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
 	 */
-	public static mxutils.proxies.DataPoint initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
+	public static mxchartutil.proxies.DataPoint initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
-		return new mxutils.proxies.DataPoint(context, mendixObject);
+		return new mxchartutil.proxies.DataPoint(context, mendixObject);
 	}
 
-	public static mxutils.proxies.DataPoint load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
+	public static mxchartutil.proxies.DataPoint load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
-		return mxutils.proxies.DataPoint.initialize(context, mendixObject);
+		return mxchartutil.proxies.DataPoint.initialize(context, mendixObject);
 	}
 
 	/**
@@ -241,7 +241,7 @@ public class DataPoint
 
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
-			final mxutils.proxies.DataPoint that = (mxutils.proxies.DataPoint) obj;
+			final mxchartutil.proxies.DataPoint that = (mxchartutil.proxies.DataPoint) obj;
 			return getMendixObject().equals(that.getMendixObject());
 		}
 		return false;
@@ -258,7 +258,7 @@ public class DataPoint
 	 */
 	public static java.lang.String getType()
 	{
-		return "MxUtils.DataPoint";
+		return "MxChartUtil.DataPoint";
 	}
 
 	/**

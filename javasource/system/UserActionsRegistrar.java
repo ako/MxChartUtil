@@ -41,9 +41,11 @@ public class UserActionsRegistrar implements EventHandler
 			component.actionRegistry().registerUserAction(appcloudservices.actions.GenerateRandomPassword.class);
 			component.actionRegistry().registerUserAction(appcloudservices.actions.LogOutUser.class);
 			component.actionRegistry().registerUserAction(appcloudservices.actions.StartSignOnServlet.class);
-			component.actionRegistry().registerUserAction(mxutils.actions.OQLChartDataset.class);
-			component.actionRegistry().registerUserAction(mxutils.actions.OQLChartDatasetJson.class);
-			component.actionRegistry().registerUserAction(mxutils.actions.OQLChartDatasetMapping.class);
+			component.actionRegistry().registerUserAction(mxchartutil.actions.GetEntities.class);
+			component.actionRegistry().registerUserAction(mxchartutil.actions.GetEntityAttributes.class);
+			component.actionRegistry().registerUserAction(mxchartutil.actions.OQLChartDataset.class);
+			component.actionRegistry().registerUserAction(mxchartutil.actions.OQLChartDatasetJson.class);
+			component.actionRegistry().registerUserAction(mxchartutil.actions.OQLChartDatasetMapping.class);
 			component.actionRegistry().registerUserAction(system.actions.VerifyPassword.class);
 		}
 	}

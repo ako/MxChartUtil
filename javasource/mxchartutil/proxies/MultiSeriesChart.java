@@ -2,7 +2,7 @@
 //
 // WARNING: Code you write here will be lost the next time you deploy the project.
 
-package mxutils.proxies;
+package mxchartutil.proxies;
 
 public class MultiSeriesChart
 {
@@ -13,7 +13,7 @@ public class MultiSeriesChart
 	/**
 	 * Internal name of this entity
 	 */
-	public static final java.lang.String entityName = "MxUtils.MultiSeriesChart";
+	public static final java.lang.String entityName = "MxChartUtil.MultiSeriesChart";
 
 	/**
 	 * Enum describing members of this entity
@@ -22,7 +22,7 @@ public class MultiSeriesChart
 	{
 		CreationDate("CreationDate"),
 		Name("Name"),
-		MultiSeriesChart_MultiSeriesDataset("MxUtils.MultiSeriesChart_MultiSeriesDataset");
+		MultiSeriesChart_MultiSeriesDataset("MxChartUtil.MultiSeriesChart_MultiSeriesDataset");
 
 		private java.lang.String metaName;
 
@@ -40,15 +40,15 @@ public class MultiSeriesChart
 
 	public MultiSeriesChart(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MxUtils.MultiSeriesChart"));
+		this(context, com.mendix.core.Core.instantiate(context, "MxChartUtil.MultiSeriesChart"));
 	}
 
 	protected MultiSeriesChart(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject multiSeriesChartMendixObject)
 	{
 		if (multiSeriesChartMendixObject == null)
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MxUtils.MultiSeriesChart", multiSeriesChartMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MxUtils.MultiSeriesChart");
+		if (!com.mendix.core.Core.isSubClassOf("MxChartUtil.MultiSeriesChart", multiSeriesChartMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a MxChartUtil.MultiSeriesChart");
 
 		this.multiSeriesChartMendixObject = multiSeriesChartMendixObject;
 		this.context = context;
@@ -58,24 +58,27 @@ public class MultiSeriesChart
 	 * @deprecated Use 'MultiSeriesChart.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@Deprecated
-	public static mxutils.proxies.MultiSeriesChart initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
+	public static mxchartutil.proxies.MultiSeriesChart initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		return mxutils.proxies.MultiSeriesChart.load(context, mendixIdentifier);
+		return mxchartutil.proxies.MultiSeriesChart.load(context, mendixIdentifier);
 	}
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
 	 */
-	public static mxutils.proxies.MultiSeriesChart initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
+	public static mxchartutil.proxies.MultiSeriesChart initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
-		return new mxutils.proxies.MultiSeriesChart(context, mendixObject);
+		if (com.mendix.core.Core.isSubClassOf("Main.DynamicMultiSeriesChart", mendixObject.getType()))
+			return main.proxies.DynamicMultiSeriesChart.initialize(context, mendixObject);
+
+		return new mxchartutil.proxies.MultiSeriesChart(context, mendixObject);
 	}
 
-	public static mxutils.proxies.MultiSeriesChart load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
+	public static mxchartutil.proxies.MultiSeriesChart load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
-		return mxutils.proxies.MultiSeriesChart.initialize(context, mendixObject);
+		return mxchartutil.proxies.MultiSeriesChart.initialize(context, mendixObject);
 	}
 
 	/**
@@ -184,7 +187,7 @@ public class MultiSeriesChart
 	/**
 	 * @return value of MultiSeriesChart_MultiSeriesDataset
 	 */
-	public final java.util.List<mxutils.proxies.MultiSeriesDataset> getMultiSeriesChart_MultiSeriesDataset() throws com.mendix.core.CoreException
+	public final java.util.List<mxchartutil.proxies.MultiSeriesDataset> getMultiSeriesChart_MultiSeriesDataset() throws com.mendix.core.CoreException
 	{
 		return getMultiSeriesChart_MultiSeriesDataset(getContext());
 	}
@@ -194,14 +197,14 @@ public class MultiSeriesChart
 	 * @return value of MultiSeriesChart_MultiSeriesDataset
 	 */
 	@SuppressWarnings("unchecked")
-	public final java.util.List<mxutils.proxies.MultiSeriesDataset> getMultiSeriesChart_MultiSeriesDataset(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final java.util.List<mxchartutil.proxies.MultiSeriesDataset> getMultiSeriesChart_MultiSeriesDataset(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		java.util.List<mxutils.proxies.MultiSeriesDataset> result = new java.util.ArrayList<mxutils.proxies.MultiSeriesDataset>();
+		java.util.List<mxchartutil.proxies.MultiSeriesDataset> result = new java.util.ArrayList<mxchartutil.proxies.MultiSeriesDataset>();
 		Object valueObject = getMendixObject().getValue(context, MemberNames.MultiSeriesChart_MultiSeriesDataset.toString());
 		if (valueObject == null)
 			return result;
 		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject))
-			result.add(mxutils.proxies.MultiSeriesDataset.initialize(context, mendixObject));
+			result.add(mxchartutil.proxies.MultiSeriesDataset.initialize(context, mendixObject));
 		return result;
 	}
 
@@ -209,7 +212,7 @@ public class MultiSeriesChart
 	 * Set value of MultiSeriesChart_MultiSeriesDataset
 	 * @param multiserieschart_multiseriesdataset
 	 */
-	public final void setMultiSeriesChart_MultiSeriesDataset(java.util.List<mxutils.proxies.MultiSeriesDataset> multiserieschart_multiseriesdataset)
+	public final void setMultiSeriesChart_MultiSeriesDataset(java.util.List<mxchartutil.proxies.MultiSeriesDataset> multiserieschart_multiseriesdataset)
 	{
 		setMultiSeriesChart_MultiSeriesDataset(getContext(), multiserieschart_multiseriesdataset);
 	}
@@ -219,10 +222,10 @@ public class MultiSeriesChart
 	 * @param context
 	 * @param multiserieschart_multiseriesdataset
 	 */
-	public final void setMultiSeriesChart_MultiSeriesDataset(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<mxutils.proxies.MultiSeriesDataset> multiserieschart_multiseriesdataset)
+	public final void setMultiSeriesChart_MultiSeriesDataset(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<mxchartutil.proxies.MultiSeriesDataset> multiserieschart_multiseriesdataset)
 	{
 		java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier> identifiers = new java.util.ArrayList<com.mendix.systemwideinterfaces.core.IMendixIdentifier>();
-		for (mxutils.proxies.MultiSeriesDataset proxyObject : multiserieschart_multiseriesdataset)
+		for (mxchartutil.proxies.MultiSeriesDataset proxyObject : multiserieschart_multiseriesdataset)
 			identifiers.add(proxyObject.getMendixObject().getId());
 		getMendixObject().setValue(context, MemberNames.MultiSeriesChart_MultiSeriesDataset.toString(), identifiers);
 	}
@@ -251,7 +254,7 @@ public class MultiSeriesChart
 
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
-			final mxutils.proxies.MultiSeriesChart that = (mxutils.proxies.MultiSeriesChart) obj;
+			final mxchartutil.proxies.MultiSeriesChart that = (mxchartutil.proxies.MultiSeriesChart) obj;
 			return getMendixObject().equals(that.getMendixObject());
 		}
 		return false;
@@ -268,7 +271,7 @@ public class MultiSeriesChart
 	 */
 	public static java.lang.String getType()
 	{
-		return "MxUtils.MultiSeriesChart";
+		return "MxChartUtil.MultiSeriesChart";
 	}
 
 	/**

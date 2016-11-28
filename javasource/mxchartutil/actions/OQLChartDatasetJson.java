@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package mxutils.actions;
+package mxchartutil.actions;
 
 import com.mendix.core.Core;
 import com.mendix.logging.ILogNode;
@@ -61,7 +61,7 @@ public class OQLChartDatasetJson extends CustomJavaAction<java.lang.String>
                 datasetMap.put(label, ds);
                 datasetArray.put(ds);
             }
-            logger.debug(String.format("Row: %s, %s, %tY-%<tm-%<td %<tH:%<tM, %f, %s, %s, %d",
+            logger.debug(String.format("Row: %s, %s, %s, %f, %s, %s, %d",
                     row.getValue(getContext(), "chartname"),
                     row.getValue(getContext(), "xlabel"),
                     row.getValue(getContext(), "xvalue"),

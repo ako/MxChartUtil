@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package mxutils.actions;
+package mxchartutil.actions;
 
 import com.mendix.core.Core;
 import com.mendix.logging.ILogNode;
@@ -16,56 +16,61 @@ import com.mendix.systemwideinterfaces.connectionbus.data.IDataTable;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import mxutils.proxies.DataPoint;
-import mxutils.proxies.MultiSeriesChart;
-import mxutils.proxies.MultiSeriesDataset;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class OQLChartDataset extends CustomJavaAction<IMendixObject>
+public class OQLChartDatasetMapping extends CustomJavaAction<IMendixObject>
 {
 	private java.lang.String OQL;
-	private IMendixObject ChartSeriesResultObject;
+	private java.lang.String ImportMappingName;
+	private IMendixObject ResultEntity;
 
-	public OQLChartDataset(IContext context, java.lang.String OQL, IMendixObject ChartSeriesResultObject)
+	public OQLChartDatasetMapping(IContext context, java.lang.String OQL, java.lang.String ImportMappingName, IMendixObject ResultEntity)
 	{
 		super(context);
 		this.OQL = OQL;
-		this.ChartSeriesResultObject = ChartSeriesResultObject;
+		this.ImportMappingName = ImportMappingName;
+		this.ResultEntity = ResultEntity;
 	}
 
 	@Override
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-        ILogNode logger = Core.getLogger(OQLChartDataset.class.getName());
+        ILogNode logger = Core.getLogger(OQLChartDatasetMapping.class.getName());
         logger.info("> executeAction");
         IDataTable dataTable = Core.retrieveOQLDataTable(getContext(), this.OQL);
-        MultiSeriesChart chart = MultiSeriesChart.initialize(getContext(), ChartSeriesResultObject);
+        JSONObject chart = new JSONObject();
         Iterator<IDataRow> iter = dataTable.iterator();
-        HashMap<String, MultiSeriesDataset> datasetMap = new HashMap<String, MultiSeriesDataset>();
+        HashMap<String, JSONObject> datasetMap = new HashMap<String, JSONObject>();
+        JSONArray datasetArray = new JSONArray();
         int i = 0;
         while (iter.hasNext()) {
             IDataRow row = iter.next();
             if (i == 0) {
-                chart.setName(row.getValue(getContext(), "chartname"));
-                chart.setCreationDate(new Date());
+                chart.put("Name", row.getValue(getContext(), "chartname").toString());
+                chart.put("CreationDate", new Date());
+                chart.put("DataSets", datasetArray);
             }
             String label = row.getValue(getContext(), "label");
             if (!datasetMap.containsKey(label)) {
-                MultiSeriesDataset ds = new MultiSeriesDataset(getContext());
-                ds.setLabel(label);
-                ds.setColor(row.getValue(getContext(), "color"));
+                JSONObject ds = new JSONObject();
+                ds.put("label", label);
+                ds.put("color", row.getValue(getContext(), "color").toString());
                 Long sortingValue = row.getValue(getContext(), "sortingvalue");
-                ds.setSortingValue(sortingValue.intValue());
+                ds.put("sortingvalue", sortingValue.intValue());
+                ds.put("datapoints", new JSONArray());
                 datasetMap.put(label, ds);
-                List<MultiSeriesDataset> lds = chart.getMultiSeriesChart_MultiSeriesDataset(getContext());
-                lds.add(ds);
-                chart.setMultiSeriesChart_MultiSeriesDataset(getContext(), lds);
+                datasetArray.put(ds);
             }
-            logger.debug(String.format("Row: %s, %s, %tY-%<tm-%<td %<tH:%<tM, %f, %s, %s, %d",
+            logger.debug(String.format("Row: %s, %s, %s, %f, %s, %s, %d",
                     row.getValue(getContext(), "chartname"),
                     row.getValue(getContext(), "xlabel"),
                     row.getValue(getContext(), "xvalue"),
@@ -75,19 +80,18 @@ public class OQLChartDataset extends CustomJavaAction<IMendixObject>
                     row.getValue(getContext(), "sortingvalue")
             ));
 
-            MultiSeriesDataset ds = datasetMap.get(row.getValue(getContext(), "label"));
-            DataPoint dp = new DataPoint(getContext());
-            dp.setyvalue(getContext(), row.getValue(getContext(), "yvalue"));
-            dp.setxvalue(getContext(), row.getValue(getContext(), "xlabel"));
-            dp.setxsortingvalue(getContext(), row.getValue(getContext(), "xvalue"));
-            List<DataPoint> ldp = ds.getMultiSeriesDataset_DataPoint(getContext());
-            ldp.add(dp);
-            ds.setMultiSeriesDataset_DataPoint(getContext(), ldp);
+            JSONObject dp = new JSONObject();
+            dp.put("yvalue", row.getValue(getContext(), "yvalue").toString());
+            dp.put("xvalue", row.getValue(getContext(), "xlabel").toString());
+            dp.put("xsortingvalue", row.getValue(getContext(), "xvalue").toString());
+            datasetMap.get(label).getJSONArray("datapoints").put(dp);
             i++;
         }
-        logger.info(String.format("Done creating charting dataseries, nr rows found: %d", i));
+        logger.info(String.format("Done creating charting dataseries, no rows found: %d", i));
+        InputStream stream = new ByteArrayInputStream(chart.toString().getBytes(StandardCharsets.UTF_8));
+        List<IMendixObject> chartObject = Core.importStream(getContext(), stream, this.ImportMappingName, null, false);
         logger.info("< executeAction");
-        return chart.getMendixObject();
+        return chartObject.get(0);
 		// END USER CODE
 	}
 
@@ -97,7 +101,7 @@ public class OQLChartDataset extends CustomJavaAction<IMendixObject>
 	@Override
 	public java.lang.String toString()
 	{
-		return "OQLChartDataset";
+		return "OQLChartDatasetMapping";
 	}
 
 	// BEGIN EXTRA CODE
