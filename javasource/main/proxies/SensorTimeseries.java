@@ -23,7 +23,8 @@ public class SensorTimeseries
 		Timestamp("Timestamp"),
 		TimestampReceived("TimestampReceived"),
 		Temperature("Temperature"),
-		Humidity("Humidity");
+		Humidity("Humidity"),
+		SensorDataId("SensorDataId");
 
 		private java.lang.String metaName;
 
@@ -260,6 +261,42 @@ public class SensorTimeseries
 	public final void setHumidity(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer humidity)
 	{
 		getMendixObject().setValue(context, MemberNames.Humidity.toString(), humidity);
+	}
+
+	/**
+	 * @return value of SensorDataId
+	 */
+	public final java.lang.Long getSensorDataId()
+	{
+		return getSensorDataId(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of SensorDataId
+	 */
+	public final java.lang.Long getSensorDataId(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.SensorDataId.toString());
+	}
+
+	/**
+	 * Set value of SensorDataId
+	 * @param sensordataid
+	 */
+	public final void setSensorDataId(java.lang.Long sensordataid)
+	{
+		setSensorDataId(getContext(), sensordataid);
+	}
+
+	/**
+	 * Set value of SensorDataId
+	 * @param context
+	 * @param sensordataid
+	 */
+	public final void setSensorDataId(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long sensordataid)
+	{
+		getMendixObject().setValue(context, MemberNames.SensorDataId.toString(), sensordataid);
 	}
 
 	/**

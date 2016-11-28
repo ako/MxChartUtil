@@ -30,7 +30,17 @@ Here's an example OQL. You need to query the following colunns:
 * sortingvalue
 
  ![OQL example][3]
+ 
+### Dynamic charter
 
+The project contains an example how you can use the OQL action to build dynamic charts.
+
+Some screenshots:
+
+ ![Specify entity and attributes for chart][5]
+
+ ![Chart popup][6]
+ 
 ## Development
 
 * runivy.cmd - download all dependencies
@@ -44,3 +54,5 @@ Here's an example OQL. You need to query the following colunns:
  [2]: docs/images/chart-action-config.png
  [3]: docs/images/oql-example.png
  [4]: docs/images/chartjs-datastructure.png
+ [5]: docs/images/dynamic_charter.png
+ [6]: docs/images/dynamic_charter_chart_popup.png
