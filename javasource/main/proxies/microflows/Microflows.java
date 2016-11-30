@@ -15,20 +15,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class Microflows
 {
 	// These are the microflows for the Main module
-	public static void attributeSelected(IContext context, mxchartutil.proxies.MxEntityAttributes _mxEntityAttributes, main.proxies.DynamicChart _dynamicChart)
-	{
-		try
-		{
-			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
-			params.put("MxEntityAttributes", _mxEntityAttributes == null ? null : _mxEntityAttributes.getMendixObject());
-			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
-			Core.execute(context, "Main.AttributeSelected", params);
-		}
-		catch (CoreException e)
-		{
-			throw new MendixRuntimeException(e);
-		}
-	}
 	public static mxchartutil.proxies.MultiSeriesChart createChart(IContext context)
 	{
 		try
@@ -66,6 +52,20 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static void deleteDynamicChart(IContext context, main.proxies.DynamicChart _dynamicChart, main.proxies.DynamicMultiSeriesChartDefinition _dynamicMultiSeriesChartDefinition)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			params.put("DynamicMultiSeriesChartDefinition", _dynamicMultiSeriesChartDefinition == null ? null : _dynamicMultiSeriesChartDefinition.getMendixObject());
+			Core.execute(context, "Main.DeleteDynamicChart", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static void entitySelected(IContext context, mxchartutil.proxies.MxEntities _mxEntities, main.proxies.DynamicChart _dynamicChart)
 	{
 		try
@@ -80,12 +80,12 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
-	public static void generateChartOQL(IContext context, main.proxies.DynamicChart _dynamicChart)
+	public static void generateChartOQL(IContext context, main.proxies.DynamicMultiSeriesChartDefinition _dynamicMultiSeriesChartDef)
 	{
 		try
 		{
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
-			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			params.put("DynamicMultiSeriesChartDef", _dynamicMultiSeriesChartDef == null ? null : _dynamicMultiSeriesChartDef.getMendixObject());
 			Core.execute(context, "Main.GenerateChartOQL", params);
 		}
 		catch (CoreException e)
@@ -121,6 +121,27 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static java.util.List<main.proxies.DynamicChart> getDynamicCharts(IContext context, main.proxies.DynamicMultiSeriesChartDefinition _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			java.util.List<IMendixObject> objs = Core.execute(context, "Main.GetDynamicCharts", params);
+			java.util.List<main.proxies.DynamicChart> result = null;
+			if (objs != null)
+			{
+				result = new java.util.ArrayList<main.proxies.DynamicChart>();
+				for (IMendixObject obj : objs)
+					result.add(main.proxies.DynamicChart.initialize(context, obj));
+			}
+			return result;
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static java.util.List<mxchartutil.proxies.MxEntities> getEntities(IContext context)
 	{
 		try
@@ -141,33 +162,12 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
-	public static java.util.List<mxchartutil.proxies.MxEntityAttributes> getEntityAttributes(IContext context, main.proxies.DynamicChart _dynamicChart)
+	public static void getJsonForOqlChartQuery(IContext context, main.proxies.DynamicMultiSeriesChartDefinition _dynamicChartDef)
 	{
 		try
 		{
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
-			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
-			java.util.List<IMendixObject> objs = Core.execute(context, "Main.GetEntityAttributes", params);
-			java.util.List<mxchartutil.proxies.MxEntityAttributes> result = null;
-			if (objs != null)
-			{
-				result = new java.util.ArrayList<mxchartutil.proxies.MxEntityAttributes>();
-				for (IMendixObject obj : objs)
-					result.add(mxchartutil.proxies.MxEntityAttributes.initialize(context, obj));
-			}
-			return result;
-		}
-		catch (CoreException e)
-		{
-			throw new MendixRuntimeException(e);
-		}
-	}
-	public static void getJsonForOqlChartQuery(IContext context, main.proxies.DynamicChart _dynamicChart)
-	{
-		try
-		{
-			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
-			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			params.put("DynamicChartDef", _dynamicChartDef == null ? null : _dynamicChartDef.getMendixObject());
 			Core.execute(context, "Main.GetJsonForOqlChartQuery", params);
 		}
 		catch (CoreException e)
@@ -175,12 +175,12 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
-	public static void mapJsonToObjects(IContext context, main.proxies.DynamicChart _dynamicChart)
+	public static void mapJsonToObjects(IContext context, main.proxies.DynamicMultiSeriesChartDefinition _dynamicMultiSeriesChart)
 	{
 		try
 		{
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
-			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			params.put("DynamicMultiSeriesChart", _dynamicMultiSeriesChart == null ? null : _dynamicMultiSeriesChart.getMendixObject());
 			Core.execute(context, "Main.MapJsonToObjects", params);
 		}
 		catch (CoreException e)
@@ -201,12 +201,53 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
-	public static mxchartutil.proxies.MultiSeriesChart showChartPopup(IContext context, main.proxies.DynamicChart _dynamicChart)
+	public static main.proxies.DynamicChart newDynamicChart2(IContext context, main.proxies.DynamicMultiSeriesChartDefinition _dynamicMultiSeriesChartDefinition)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicMultiSeriesChartDefinition", _dynamicMultiSeriesChartDefinition == null ? null : _dynamicMultiSeriesChartDefinition.getMendixObject());
+			IMendixObject result = (IMendixObject)Core.execute(context, "Main.NewDynamicChart2", params);
+			return result == null ? null : main.proxies.DynamicChart.initialize(context, result);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static main.proxies.DynamicMultiSeriesChartDefinition newDynamicMultiSeriesChart(IContext context)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			IMendixObject result = (IMendixObject)Core.execute(context, "Main.NewDynamicMultiSeriesChart", params);
+			return result == null ? null : main.proxies.DynamicMultiSeriesChartDefinition.initialize(context, result);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void saveDynamicChart(IContext context, main.proxies.DynamicChart _dynamicChart, main.proxies.DynamicMultiSeriesChartDefinition _dynamicMultiSeriesChartDefinition)
 	{
 		try
 		{
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
 			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			params.put("DynamicMultiSeriesChartDefinition", _dynamicMultiSeriesChartDefinition == null ? null : _dynamicMultiSeriesChartDefinition.getMendixObject());
+			Core.execute(context, "Main.SaveDynamicChart", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static mxchartutil.proxies.MultiSeriesChart showChartPopup(IContext context, main.proxies.DynamicMultiSeriesChartDefinition _dynamicMultiSeriesChartDef)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicMultiSeriesChartDef", _dynamicMultiSeriesChartDef == null ? null : _dynamicMultiSeriesChartDef.getMendixObject());
 			IMendixObject result = (IMendixObject)Core.execute(context, "Main.ShowChartPopup", params);
 			return result == null ? null : mxchartutil.proxies.MultiSeriesChart.initialize(context, result);
 		}
@@ -221,6 +262,111 @@ public class Microflows
 		{
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
 			Core.execute(context, "Main.TestOQLToDatasetEntity", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void xlabelAttributeSelected(IContext context, mxchartutil.proxies.MxEntityAttributes _mxEntityAttributes, main.proxies.DynamicChart _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("MxEntityAttributes", _mxEntityAttributes == null ? null : _mxEntityAttributes.getMendixObject());
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			Core.execute(context, "Main.XlabelAttributeSelected", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static java.util.List<mxchartutil.proxies.MxEntityAttributes> xlabelGetEntityAttributes(IContext context, main.proxies.DynamicChart _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			java.util.List<IMendixObject> objs = Core.execute(context, "Main.XlabelGetEntityAttributes", params);
+			java.util.List<mxchartutil.proxies.MxEntityAttributes> result = null;
+			if (objs != null)
+			{
+				result = new java.util.ArrayList<mxchartutil.proxies.MxEntityAttributes>();
+				for (IMendixObject obj : objs)
+					result.add(mxchartutil.proxies.MxEntityAttributes.initialize(context, obj));
+			}
+			return result;
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void xValueAttributeSelected(IContext context, mxchartutil.proxies.MxEntityAttributes _mxEntityAttributes, main.proxies.DynamicChart _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("MxEntityAttributes", _mxEntityAttributes == null ? null : _mxEntityAttributes.getMendixObject());
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			Core.execute(context, "Main.XValueAttributeSelected", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static java.util.List<mxchartutil.proxies.MxEntityAttributes> xValueGetEntityAttributes(IContext context, main.proxies.DynamicChart _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			java.util.List<IMendixObject> objs = Core.execute(context, "Main.XValueGetEntityAttributes", params);
+			java.util.List<mxchartutil.proxies.MxEntityAttributes> result = null;
+			if (objs != null)
+			{
+				result = new java.util.ArrayList<mxchartutil.proxies.MxEntityAttributes>();
+				for (IMendixObject obj : objs)
+					result.add(mxchartutil.proxies.MxEntityAttributes.initialize(context, obj));
+			}
+			return result;
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void yValueAttributeSelected(IContext context, mxchartutil.proxies.MxEntityAttributes _mxEntityAttributes, main.proxies.DynamicChart _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("MxEntityAttributes", _mxEntityAttributes == null ? null : _mxEntityAttributes.getMendixObject());
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			Core.execute(context, "Main.YValueAttributeSelected", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static java.util.List<mxchartutil.proxies.MxEntityAttributes> yValueGetEntityAttributes(IContext context, main.proxies.DynamicChart _dynamicChart)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DynamicChart", _dynamicChart == null ? null : _dynamicChart.getMendixObject());
+			java.util.List<IMendixObject> objs = Core.execute(context, "Main.YValueGetEntityAttributes", params);
+			java.util.List<mxchartutil.proxies.MxEntityAttributes> result = null;
+			if (objs != null)
+			{
+				result = new java.util.ArrayList<mxchartutil.proxies.MxEntityAttributes>();
+				for (IMendixObject obj : objs)
+					result.add(mxchartutil.proxies.MxEntityAttributes.initialize(context, obj));
+			}
+			return result;
 		}
 		catch (CoreException e)
 		{

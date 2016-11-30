@@ -29,7 +29,8 @@ public class DynamicChart
 		Label("Label"),
 		SortingValue("SortingValue"),
 		OqlStatement("OqlStatement"),
-		JsonResult("JsonResult");
+		JsonResult("JsonResult"),
+		DynamicChart_DynamicMultiSeriesChartDefinition("Main.DynamicChart_DynamicMultiSeriesChartDefinition");
 
 		private java.lang.String metaName;
 
@@ -474,6 +475,49 @@ public class DynamicChart
 	public final void setJsonResult(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String jsonresult)
 	{
 		getMendixObject().setValue(context, MemberNames.JsonResult.toString(), jsonresult);
+	}
+
+	/**
+	 * @return value of DynamicChart_DynamicMultiSeriesChartDefinition
+	 */
+	public final main.proxies.DynamicMultiSeriesChartDefinition getDynamicChart_DynamicMultiSeriesChartDefinition() throws com.mendix.core.CoreException
+	{
+		return getDynamicChart_DynamicMultiSeriesChartDefinition(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of DynamicChart_DynamicMultiSeriesChartDefinition
+	 */
+	public final main.proxies.DynamicMultiSeriesChartDefinition getDynamicChart_DynamicMultiSeriesChartDefinition(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		main.proxies.DynamicMultiSeriesChartDefinition result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.DynamicChart_DynamicMultiSeriesChartDefinition.toString());
+		if (identifier != null)
+			result = main.proxies.DynamicMultiSeriesChartDefinition.load(context, identifier);
+		return result;
+	}
+
+	/**
+	 * Set value of DynamicChart_DynamicMultiSeriesChartDefinition
+	 * @param dynamicchart_dynamicmultiserieschartdefinition
+	 */
+	public final void setDynamicChart_DynamicMultiSeriesChartDefinition(main.proxies.DynamicMultiSeriesChartDefinition dynamicchart_dynamicmultiserieschartdefinition)
+	{
+		setDynamicChart_DynamicMultiSeriesChartDefinition(getContext(), dynamicchart_dynamicmultiserieschartdefinition);
+	}
+
+	/**
+	 * Set value of DynamicChart_DynamicMultiSeriesChartDefinition
+	 * @param context
+	 * @param dynamicchart_dynamicmultiserieschartdefinition
+	 */
+	public final void setDynamicChart_DynamicMultiSeriesChartDefinition(com.mendix.systemwideinterfaces.core.IContext context, main.proxies.DynamicMultiSeriesChartDefinition dynamicchart_dynamicmultiserieschartdefinition)
+	{
+		if (dynamicchart_dynamicmultiserieschartdefinition == null)
+			getMendixObject().setValue(context, MemberNames.DynamicChart_DynamicMultiSeriesChartDefinition.toString(), null);
+		else
+			getMendixObject().setValue(context, MemberNames.DynamicChart_DynamicMultiSeriesChartDefinition.toString(), dynamicchart_dynamicmultiserieschartdefinition.getMendixObject().getId());
 	}
 
 	/**
