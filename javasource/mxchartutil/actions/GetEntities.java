@@ -9,9 +9,13 @@
 
 package mxchartutil.actions;
 
+import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
+import com.mendix.webui.CustomJavaAction;
+import mxchartutil.proxies.MxEntities;
+import java.util.ArrayList;
 
 public class GetEntities extends CustomJavaAction<java.util.List<IMendixObject>>
 {
@@ -27,7 +31,17 @@ public class GetEntities extends CustomJavaAction<java.util.List<IMendixObject>>
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
+        ArrayList<IMendixObject> entities = new ArrayList<IMendixObject>();
+        Iterable<IMetaObject> metaObjectsIter = Core.getMetaObjects();
+        metaObjectsIter.forEach(meta -> {
+            String moduleName = meta.getModuleName();
+            String entityName = meta.getName();
+            MxEntities entityObj = new MxEntities(getContext());
+            entityObj.setModuleName(moduleName);
+            entityObj.setEntityName(entityName);
+            entities.add(entityObj.getMendixObject());
+        });
+        return entities;
 		// END USER CODE
 	}
 

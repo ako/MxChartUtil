@@ -21,7 +21,7 @@ public class MxEntities
 	public enum MemberNames
 	{
 		ModuleName("ModuleName"),
-		AttributeName("AttributeName");
+		EntityName("EntityName");
 
 		private java.lang.String metaName;
 
@@ -145,39 +145,39 @@ public class MxEntities
 	}
 
 	/**
-	 * @return value of AttributeName
+	 * @return value of EntityName
 	 */
-	public final java.lang.String getAttributeName()
+	public final java.lang.String getEntityName()
 	{
-		return getAttributeName(getContext());
+		return getEntityName(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of AttributeName
+	 * @return value of EntityName
 	 */
-	public final java.lang.String getAttributeName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getEntityName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.AttributeName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.EntityName.toString());
 	}
 
 	/**
-	 * Set value of AttributeName
-	 * @param attributename
+	 * Set value of EntityName
+	 * @param entityname
 	 */
-	public final void setAttributeName(java.lang.String attributename)
+	public final void setEntityName(java.lang.String entityname)
 	{
-		setAttributeName(getContext(), attributename);
+		setEntityName(getContext(), entityname);
 	}
 
 	/**
-	 * Set value of AttributeName
+	 * Set value of EntityName
 	 * @param context
-	 * @param attributename
+	 * @param entityname
 	 */
-	public final void setAttributeName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String attributename)
+	public final void setEntityName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String entityname)
 	{
-		getMendixObject().setValue(context, MemberNames.AttributeName.toString(), attributename);
+		getMendixObject().setValue(context, MemberNames.EntityName.toString(), entityname);
 	}
 
 	/**

@@ -9,28 +9,43 @@
 
 package mxchartutil.actions;
 
+import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive;
 import com.mendix.webui.CustomJavaAction;
+import mxchartutil.proxies.MxEntityAttributes;
+import java.util.ArrayList;
+import java.util.Collection;
 
-public class GetEntityAttributes extends CustomJavaAction<java.lang.Boolean>
+public class GetEntityAttributes extends CustomJavaAction<java.util.List<IMendixObject>>
 {
-	private java.lang.String ModuleName;
 	private java.lang.String EntityName;
 	private java.lang.String AttributeName;
 
-	public GetEntityAttributes(IContext context, java.lang.String ModuleName, java.lang.String EntityName, java.lang.String AttributeName)
+	public GetEntityAttributes(IContext context, java.lang.String EntityName, java.lang.String AttributeName)
 	{
 		super(context);
-		this.ModuleName = ModuleName;
 		this.EntityName = EntityName;
 		this.AttributeName = AttributeName;
 	}
 
 	@Override
-	public java.lang.Boolean executeAction() throws Exception
+	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
+        ArrayList<IMendixObject> attributes = new ArrayList<IMendixObject>();
+        Collection<IMetaPrimitive> metaObjectsIter = (Collection<IMetaPrimitive>) Core.getMetaObject(this.EntityName).getMetaPrimitives();
+        metaObjectsIter.forEach(meta -> {
+            String primitiveName = meta.getName();
+            String entityName = meta.getParent().getName();
+            MxEntityAttributes attrObj = new MxEntityAttributes(getContext());
+            attrObj.setEntityName(entityName);
+            attrObj.setAttributeName(primitiveName);
+            attrObj.setAttributeType(meta.getType().name());
+            attributes.add(attrObj.getMendixObject());
+        });
+        return attributes;
 		// END USER CODE
 	}
 
